@@ -7,7 +7,7 @@ import (
 
 type TaskService interface {
 	Store(task *model.Task) error
-	Update(id int, task *model.Task) error
+	Update(task *model.Task) error
 	Delete(id int) error
 	GetByID(id int) (*model.Task, error)
 	GetList() ([]model.Task, error)
@@ -31,7 +31,7 @@ func (c *taskService) Store(task *model.Task) error {
 	return nil
 }
 
-func (s *taskService) Update(id int, task *model.Task) error {
+func (s *taskService) Update(task *model.Task) error {
 	err := s.taskRepository.Update(task)
 	if err != nil {
 		return err
@@ -66,7 +66,6 @@ func (s *taskService) GetList() ([]model.Task, error) {
 
 	return tasks, nil
 }
-
 
 func (s *taskService) GetTaskCategory(id int) ([]model.TaskCategory, error) {
 	categories, err := s.taskRepository.GetTaskCategory(id)
